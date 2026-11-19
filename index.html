@@ -1,0 +1,335 @@
+<title>Lucio Roa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  :root{
+    /* Layout: dark editorial sports page — full-bleed hero, condensed display type, red/gold accent on near-black */
+    --bg:#0b0a0a;
+    --bg-raised:#141212;
+    --fg:#f4efe7;
+    --fg-dim:#aaa39a;
+    --accent:#d81b2b;
+    --accent-dim:#7a0f18;
+    --gold:#c79a4b;
+    --line:rgba(244,239,231,0.12);
+    color-scheme: dark;
+    font-family:"Work Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    padding-left:max(0px, env(safe-area-inset-left, 0px));
+    padding-right:max(0px, env(safe-area-inset-right, 0px));
+    overflow-x:hidden;
+  }
+  .gutter{
+    padding-left:max(20px, env(safe-area-inset-left, 0px));
+    padding-right:max(20px, env(safe-area-inset-right, 0px));
+  }
+  h1,h2,h3{font-family:"Anton",system-ui,sans-serif;font-weight:400;margin:0;text-wrap:balance;letter-spacing:0.01em}
+  .eyebrow{
+    font-family:"Barlow Condensed",system-ui,sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.22em;
+    font-size:0.78rem;
+    color:var(--gold);
+    font-weight:600;
+  }
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:calc(14px + env(safe-area-inset-top, 0px));
+    padding-bottom:14px;
+    background:linear-gradient(to bottom, rgba(11,10,10,0.92), rgba(11,10,10,0));
+    pointer-events:none;
+  }
+  .topbar::before{
+    content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);
+    background:rgba(11,10,10,0.92);z-index:51;
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;width:100%;pointer-events:auto}
+  .topbar .name{font-family:"Anton";font-size:1rem;letter-spacing:0.04em}
+  .topbar .cta{
+    font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:0.12em;
+    font-size:0.82rem;font-weight:700;background:var(--accent);color:#fff;
+    padding:9px 18px;border-radius:2px;text-decoration:none;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    object-position:50% 18%;
+    filter:grayscale(0.08) contrast(1.08);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(to top, rgba(11,10,10,0.96) 2%, rgba(11,10,10,0.35) 42%, rgba(11,10,10,0.15) 70%),
+      linear-gradient(to right, rgba(11,10,10,0.55) 0%, rgba(11,10,10,0) 45%);
+  }
+  .hero-content{position:relative;z-index:2;padding-bottom:64px;padding-top:120px;width:100%}
+  .hero h1{
+    font-size:clamp(3.4rem, 13vw, 8.5rem);
+    line-height:0.86;
+    color:#fff;
+    text-shadow:0 2px 24px rgba(0,0,0,0.4);
+  }
+  .hero .eyebrow{margin-bottom:14px;display:block}
+  .hero .tagline{
+    max-width:46ch;margin-top:20px;font-size:1.05rem;line-height:1.55;color:#e9e3da;
+  }
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .btn-primary{
+    font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:0.12em;font-weight:700;
+    background:var(--accent);color:#fff;padding:15px 30px;border-radius:2px;text-decoration:none;font-size:0.95rem;
+    border:1px solid var(--accent);
+  }
+  .btn-ghost{
+    font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:0.12em;font-weight:700;
+    background:transparent;color:#fff;padding:15px 30px;border-radius:2px;text-decoration:none;font-size:0.95rem;
+    border:1px solid rgba(255,255,255,0.4);
+  }
+
+  /* ---------- stats strip ---------- */
+  .stats{
+    background:var(--bg-raised);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .stats .wrap{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    padding-block:28px;
+  }
+  .stat{text-align:center;padding-inline:10px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:none}
+  .stat .num{font-family:"Anton";font-size:clamp(1.8rem,5vw,2.6rem);color:var(--gold);line-height:1}
+  .stat .label{
+    font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:0.14em;font-size:0.72rem;
+    color:var(--fg-dim);margin-top:8px;
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding-block:92px}
+  .section-head{margin-bottom:46px;max-width:60ch}
+  .section-head h2{font-size:clamp(2.1rem,5vw,3.2rem);margin-top:10px;color:#fff}
+
+  /* ---------- about ---------- */
+  .about .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center}
+  .about figure{margin:0;position:relative}
+  .about img{border-radius:2px;filter:contrast(1.05)}
+  .about figure::before{
+    content:"";position:absolute;top:18px;left:-18px;right:18px;bottom:-18px;
+    border:1px solid var(--accent);z-index:-1;
+  }
+  .about p{font-size:1.06rem;line-height:1.75;color:#ddd6cc;margin:0 0 18px}
+  .about .pull{
+    font-family:"Anton";font-size:1.5rem;color:var(--gold);line-height:1.25;margin:26px 0;max-width:22ch;
+  }
+
+  /* ---------- break ---------- */
+  .break{position:relative;padding-block:0;min-height:60vh;display:flex;align-items:center;overflow:hidden}
+  .break img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+  .break::after{content:"";position:absolute;inset:0;background:rgba(11,10,10,0.6)}
+  .break .wrap{position:relative;z-index:2;text-align:center}
+  .break h3{
+    font-size:clamp(2rem,6vw,4.2rem);color:#fff;line-height:1.05;text-transform:uppercase;
+  }
+  .break h3 span{color:var(--accent)}
+
+  /* ---------- services ---------- */
+  .services{background:var(--bg-raised)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .card{background:var(--bg-raised);padding:38px 30px;display:flex;flex-direction:column;gap:16px}
+  .card .ic{width:40px;height:40px;color:var(--accent)}
+  .card h3{font-size:1.4rem;color:#fff;font-family:"Anton"}
+  .card p{color:var(--fg-dim);font-size:0.98rem;line-height:1.6;margin:0}
+
+  /* ---------- gallery ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:6px;
+  }
+  .gallery-grid a{display:block;aspect-ratio:2/3;overflow:hidden;position:relative}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .5s ease;filter:grayscale(0.55) contrast(1.05)}
+  .gallery-grid a:hover img{transform:scale(1.06);filter:grayscale(0)}
+
+  /* ---------- contact ---------- */
+  .contact{background:var(--bg-raised);border-top:1px solid var(--line)}
+  .contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .contact p{color:var(--fg-dim);line-height:1.7;font-size:1.02rem}
+  form{display:flex;flex-direction:column;gap:14px}
+  label{font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:0.1em;font-size:0.78rem;color:var(--fg-dim)}
+  input,textarea{
+    width:100%;background:var(--bg);border:1px solid var(--line);color:var(--fg);
+    padding:13px 14px;border-radius:2px;font-family:inherit;font-size:0.98rem;
+  }
+  input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+  textarea{min-height:110px;resize:vertical}
+  .field{display:flex;flex-direction:column;gap:6px}
+  button[type=submit]{
+    margin-top:6px;cursor:pointer;
+  }
+  .confirm{
+    display:none;margin-top:14px;padding:14px 16px;background:rgba(216,27,43,0.12);
+    border:1px solid var(--accent);border-radius:2px;color:#fff;font-size:0.95rem;
+  }
+  .confirm.show{display:block}
+
+  footer{padding-block:34px;border-top:1px solid var(--line)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:0.1em;font-size:0.76rem;color:var(--fg-dim)}
+
+  @media (max-width:860px){
+    .about .wrap{grid-template-columns:1fr}
+    .about figure::before{display:none}
+    .cards{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:repeat(3,1fr)}
+    .contact .wrap{grid-template-columns:1fr}
+    .stats .wrap{grid-template-columns:1fr}
+    .stat{border-left:none;border-top:1px solid var(--line);padding-block:14px}
+    .stat:first-child{border-top:none}
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="topbar">
+  <div class="wrap gutter">
+    <span class="name">LUCIO ROA</span>
+    <a class="cta" href="#contacto">Sumate</a>
+  </div>
+</div>
+
+<section class="hero">
+  <img src="hero.jpg" alt="Lucio Roa en el gimnasio, con guantes puestos">
+  <div class="hero-content gutter">
+    <div class="wrap">
+      <span class="eyebrow">Kickboxing · K1 · Paternal, Bs. As.</span>
+      <h1>LUCIO<br>ROA</h1>
+      <p class="tagline">18 años. Peleador activo de Kickboxing y K1. Ahora abro un cupo limitado de entrenamiento personalizado para quien quiere progresar en serio — en el ring o fuera de él.</p>
+      <div class="ctas">
+        <a class="btn-primary" href="#contacto">Quiero entrenar con Lucio</a>
+        <a class="btn-ghost" href="#gym">Ver el gimnasio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap gutter">
+    <div class="stat"><div class="num">18</div><div class="label">Años</div></div>
+    <div class="stat"><div class="num">K1 / KB</div><div class="label">Disciplinas</div></div>
+    <div class="stat"><div class="num">Paternal</div><div class="label">Base de entrenamiento, CABA</div></div>
+  </div>
+</div>
+
+<section class="about">
+  <div class="wrap gutter">
+    <figure>
+      <img src="about.jpg" alt="Lucio Roa de pie junto a las bolsas de boxeo">
+    </figure>
+    <div>
+      <span class="eyebrow">Quién te entrena</span>
+      <h2 style="margin-top:10px">Un peleador activo, no un instructor de manual.</h2>
+      <p class="pull">"Lo que te enseño es lo que yo mismo entreno todos los días."</p>
+      <p>Me llamo Lucio Roa, tengo 18 años y compito activamente en Kickboxing y K1. Entreno en Paternal, Buenos Aires, donde construí mi base a fuerza de rutina: bolsa, pads, sparring y muchas horas de gimnasio.</p>
+      <p>Ahora abro un cupo limitado de alumnos para entrenamiento personalizado — para quien quiere pelear, o para quien quiere entrenar con la exigencia y la estructura de alguien que compite de verdad.</p>
+    </div>
+  </div>
+</section>
+
+<section class="break" id="gym" style="padding-block:0">
+  <img src="break.jpg" alt="Lucio Roa concentrado antes de entrenar">
+  <div class="wrap gutter">
+    <h3>Disciplina. <span>Constancia.</span> Resultados.</h3>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap gutter">
+    <div class="section-head">
+      <span class="eyebrow">El plan</span>
+      <h2>Entrenamiento personalizado, todo en uno</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 11V7a3 3 0 0 1 6 0v1M17 11V9.5a2 2 0 0 1 4 0V14a7 7 0 0 1-7 7h-2a7 7 0 0 1-6.3-4L4 13.5a1.8 1.8 0 0 1 2.6-2.4L8 12.5"/></svg>
+        <h3>Entrenamiento</h3>
+        <p>Técnica de Kickboxing y K1, trabajo de pads, acondicionamiento físico y planificación semanal adaptada a tu nivel y a tu objetivo.</p>
+      </div>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c-1.5 2-2 3.6-2 5a4 4 0 0 0 8 0c0-1.4-.5-3-2-5-1 1.3-1.5 1.3-2 0-.5 1.3-1 1.3-2 0Z"/><path d="M5 13a7 7 0 0 0 14 0c0-3-2-5-7-5s-7 2-7 5Z"/></svg>
+        <h3>Nutrición</h3>
+        <p>Pautas de alimentación ajustadas a tu rutina de entrenamiento, pensadas para rendir en los trabajos fuertes y recuperar bien.</p>
+      </div>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm8 2a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c.3-2.2 1.8-4 3.8-4.6"/></svg>
+        <h3>Acompañamiento</h3>
+        <p>Seguimiento constante, corrección de técnica clase a clase y contacto directo conmigo para resolver dudas entre sesiones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" style="padding-bottom:0">
+  <div class="wrap gutter">
+    <div class="section-head">
+      <span class="eyebrow">Día a día</span>
+      <h2>Adentro del gimnasio</h2>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <a href="#"><img src="gallery-1.jpg" alt="Entrenamiento de Lucio Roa"></a>
+    <a href="#"><img src="gallery-2.jpg" alt="Entrenamiento de Lucio Roa"></a>
+    <a href="#"><img src="gallery-3.jpg" alt="Entrenamiento de Lucio Roa"></a>
+    <a href="#"><img src="gallery-4.jpg" alt="Entrenamiento de Lucio Roa"></a>
+    <a href="#"><img src="gallery-5.jpg" alt="Entrenamiento de Lucio Roa"></a>
+    <a href="#"><img src="gallery-6.jpg" alt="Entrenamiento de Lucio Roa"></a>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap gutter">
+    <div>
+      <span class="eyebrow">Cupos limitados</span>
+      <h2 style="font-size:clamp(2rem,5vw,2.8rem);margin-top:10px;color:#fff">Sumate al entrenamiento</h2>
+      <p>Dejá tus datos y te contesto para coordinar una primera charla: nivel actual, objetivos y disponibilidad. Entrenamiento, nutrición y acompañamiento, todo en un mismo plan armado para vos.</p>
+    </div>
+    <form id="joinForm">
+      <div class="field">
+        <label for="f-name">Nombre</label>
+        <input id="f-name" name="name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="f-contact">Email o teléfono</label>
+        <input id="f-contact" name="contact" type="text" required>
+      </div>
+      <div class="field">
+        <label for="f-msg">Contanos tu objetivo</label>
+        <textarea id="f-msg" name="msg" placeholder="Nivel actual, objetivo, disponibilidad horaria..."></textarea>
+      </div>
+      <button class="btn-primary" type="submit" style="border:none">Enviar consulta</button>
+      <div class="confirm" id="confirmMsg">¡Listo! Guardamos tu consulta — Lucio te responde a la brevedad para coordinar.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap gutter">
+    <span>© 2026 Lucio Roa — Kickboxing &amp; K1</span>
+    <span>Paternal, Buenos Aires, Argentina</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('joinForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('confirmMsg').classList.add('show');
+    this.reset();
+  });
+</script>
